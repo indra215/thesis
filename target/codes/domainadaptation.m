@@ -103,9 +103,11 @@ function domainadaptation(distortion,flag,dictSize,data)
             data = load(f);
             target_dict = data.dict;
             clear data
-
-            temp = pinv(target_dict'*target_dict);
-            M = temp*target_dict'*source_dict;
+    
+            % fix the formula
+            M = pinv(target_dict)*source_dict;
+            %temp = pinv(target_dict'*target_dict);
+            %M = temp*target_dict'*source_dict;
 
             ener = norm(M,'fro');
             error = norm((target_dict*M - source_dict),'fro');
